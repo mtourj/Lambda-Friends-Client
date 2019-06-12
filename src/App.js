@@ -1,26 +1,53 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import axios from 'axios';
 
-export default App;
+import FriendsList from './components/FriendsList';
+import FriendForm from './components/FriendForm';
+
+export default class App extends React.Component {
+  state = {
+    friends: ['Loading...']
+  };
+
+  getData = async () => {
+    await axios
+      .get('http://localhost:5000/friends')
+      .then(res => {
+        this.setState({ friends: res.data });
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  componentDidMount() {
+    this.getData();
+  }
+
+  addFriend = async (name, age, email) => {
+    await axios.post('http://localhost:5000/friends', { name, age, email });
+    this.getData();
+  }
+
+  updateFriend = async (name, age, email, id) => {
+    await axios.put(`http://localhost:5000/friends/${id}`, { name, age, email });
+    this.getData();
+  }
+  
+  deleteFriend = async id => {
+    await axios.delete(`http://localhost:5000/friends/${id}`);
+    this.getData();
+  }
+
+  render() {
+    return (
+      <div className='App'>
+        <FriendForm submit={this.addFriend} />
+        <FriendsList updateFriend={this.updateFriend} friends={this.state.friends} deleteFriend={this.deleteFriend} />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"></link>
+      </div>
+    );
+  }
+}

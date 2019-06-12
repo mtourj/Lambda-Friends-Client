@@ -1,0 +1,25 @@
+.new-friend-form {
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  .row {
+    display: flex;
+    flex-direction: row;
+
+    .field {
+      padding: 0 10px;
+    }
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+
+    .field {
+      padding: 8px 2px;
+    }
+  }
+}
