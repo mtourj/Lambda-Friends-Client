@@ -1,0 +1,9 @@
+.list {
+  border-top: 1px solid black;
+  
+  margin: 20px 0;
+  padding: 4px;
+
+  display: flex;
+  flex-flow: row wrap;
+}

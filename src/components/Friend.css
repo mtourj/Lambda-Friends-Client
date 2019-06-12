@@ -1,0 +1,39 @@
+.friend {
+  border: 1px solid #efefef;
+  width: 320px;
+  box-shadow: 0 0 10px -3px gray;
+  padding: 15px;
+  margin: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.buttons {
+  position: absolute;
+  transform: translateX(255px);
+}
+
+.buttons button {
+  margin: 3px;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: navy;
+  color: white;
+  cursor: pointer;
+
+  transition: background 0.3s;
+}
+
+.buttons button:hover {
+  background: blue;
+}
+
+.buttons button:last-child {
+  background: crimson;
+}
+
+.buttons button:last-child:hover {
+  background: red;
+}
